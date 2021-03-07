@@ -4,7 +4,10 @@ const jwt = require("jsonwebtoken");
 
 exports.getAllState = async (req, res) => {
   try {
-    state = await State.find().select({ _id: 1, name: 1 });
+    state = await State.find({ user: userId }).select({
+      _id: 1,
+      name: 1,
+    });
     return res.json({
       message: "State Detail",
       status: 200,
@@ -29,6 +32,7 @@ exports.createState = async (req, res) => {
     }
     const newState = new State({
       name: req.body.state_name,
+      user: userId,
     });
     await newState.save();
     return res.json({
@@ -45,7 +49,10 @@ exports.createState = async (req, res) => {
 
 exports.getDistrictsByStateId = async (req, res) => {
   try {
-    const state = await State.findOne({ _id: req.params.state_id });
+    const state = await State.findOne({
+      _id: req.params.state_id,
+      user: userId,
+    });
     if (!state) {
       return res.status(400).json({
         success: false,
@@ -93,6 +100,7 @@ exports.createDistrict = async (req, res) => {
     const newDistrict = new District({
       name: req.body.district_name,
       state_id: req.body.state_id,
+      user: userId,
     });
     await newDistrict.save();
     return res.json({

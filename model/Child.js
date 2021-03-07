@@ -24,6 +24,9 @@ const ChildSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
   },
   { timestamps: true }
 );

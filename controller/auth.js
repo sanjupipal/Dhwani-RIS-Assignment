@@ -14,6 +14,7 @@ exports.authMiddleware = async (req, res, next) => {
         error: "Not Authorized",
       });
     }
+    global.userId = decoded._id;
     next();
   } catch (error) {
     console.error(error.message);

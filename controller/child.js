@@ -28,6 +28,7 @@ exports.createChild = async (req, res) => {
       mother_name,
       district_id,
       photo,
+      user: userId,
     });
 
     await newChild.save();
@@ -44,7 +45,7 @@ exports.createChild = async (req, res) => {
 
 exports.getChild = async (req, res) => {
   try {
-    const child = await Child.find().select({
+    const child = await Child.find({ user: req.headers.token }).select({
       _id: 1,
       name: 1,
       sex: 1,

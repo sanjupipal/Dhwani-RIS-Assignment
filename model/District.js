@@ -9,6 +9,9 @@ const DistrictSchema = new mongoose.Schema(
     state_id: {
       type: mongoose.Schema.Types.ObjectId,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
   },
   { timestamps: true }
 );
